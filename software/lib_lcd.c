@@ -420,6 +420,40 @@ void fill_display(unsigned char width, unsigned char height, unsigned char byte)
 	}
 }
 
+void draw_rect(unsigned char x, unsigned char y, unsigned char width, unsigned char height)
+{
+    int address, i;
+    unsigned char top_byte = 0xFF, bot_byte = 0xFF;
+    // Shift top_byte left by offset
+    // Shift bot_byte right by offset w/o sign extension
+    int top_address = y >> 3; // Y / 8
+    int offset_top = y - (top_address << 3);
+
+    int bot_address = (y + height) >> 3;
+    int offset_bot = (1 + bot_address) << 3 - (y + height);
+
+    top_byte <<= offset_top;
+    bot_byte >>= offset_bot;
+
+
+    /* Write top. */
+    set_cursor(x, top_address);
+    for(i = width; i > 0; i--)
+        set_instruction(1, top_byte);
+
+    /* Write mid. */
+    for(address = top_address + 1; address <= bot_address - 1; address++) {
+        set_cursor(x, address);
+        for(i = width; i > 0; i--)
+                set_instruction(1, 0xFF);
+    }
+
+    /* Write bot. */
+    set_cursor(x, bot_address);
+    for(i = width; i > 0; i--)
+        set_instruction(1, bot_byte);
+}
+
 /*
 // for parallel port (8080)
 void set_instruction(unsigned char register_sel, unsigned char number)

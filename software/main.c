@@ -28,53 +28,21 @@ void main(void)
   	init_LCD();
   	
   	// SCENE 00 - TYPER INTRO ---------------------------------------
-  	x=0;
-  	scene_00_typer_help(0);
-  	scene_00_typer_help(4);
-  	wait_ms(time_ms);
-  	write_h_string(4,0,str_scene00_3,0);
-  	wait_ms(time_ms);
-  	write_h_string(17,0,str_scene00_3,0);
-  	wait_ms(500);
-  	string_typer(5,1,str_scene00_0,3,1500);
   	
-	x=lcd_width;
-	while(x!=-60)
-	{	
-		draw_string_sin(x--,44,str_scene00_1,3);
-		wait_ms(30);
-		clean_area(0,lcd_width,5,lcd_height_b);
-	}
-	wait_ms(2000);
-  	fill_display(lcd_width,lcd_height,0x00);
-  	wait_ms(1000);
   	// --------------------------------------------------------------
 	
 	// SCENE 01 - CITY-SCROLLER -------------------------------------
-	x=lcd_width,y=0,x1=lcd_width,y1=0,x2=lcd_width,y2=lcd_width-1;
-	while(x>=-400)
-	{	
-		if(x<1) 			// start normal scroller
-		{
-			draw_string(x1,y,str_scene01_2);
-			if(y1) y--; 	// y1 = direction		
-			else y++;
-			if(y==7) y1=1;	// moving up
-			if(!y) y1=0;	// moving down
-			x1-=2;
-		}
-		draw_bitmap(x2--,16,cityb_w,cityb_h,cityb);
-		if(x2+(signed int)cityb_w<lcd_width)
-			draw_bitmap(y2--,16,cityb_w,cityb_h,cityb);
-		x--;
-		wait_ms(30);
-		clean_area(0,lcd_width,0,1);	// scroller area
-	}
 	// --------------------------------------------------------------
 	
 	// SCENE 02 - BOUNCE DAT BMP ------------------------------------
-	bouncy_bmp(85,64,10,baabis_w,baabis_h,baabis);
-	wait_ms(1000);
+//	draw_bitmap(0,0,baabis_w,baabis_h,baabis);
+//	draw_bitmap(0,50,baabis_w,baabis_h,baabis);
+//	clean_area()
+//  	fill_display(10, 40, 0x01);
+  	draw_rect(10, 10, 2, 15);
+
+  	draw_rect(lcd_width - 10, 42, 2, 15);
+	__delay_cycles(100000000000);
 	write_h_string(12,0,str_scene02_hoo,0);
 	wait_ms(1000);
 	// --------------------------------------------------------------

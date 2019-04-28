@@ -430,7 +430,8 @@ void draw_rect(unsigned char x, unsigned char y, unsigned char width, unsigned c
     int offset_top = y - (top_address << 3);
 
     int bot_address = (y + height) >> 3;
-    int offset_bot = (1 + bot_address) << 3 - (y + height);
+    int offset_bot = 8 - (y + height) - (bot_address << 3);
+//    int offset_bot = (1 + bot_address) << 3 - (y + height);
 
     top_byte <<= offset_top;
     bot_byte >>= offset_bot;

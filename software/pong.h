@@ -8,7 +8,7 @@
 
 #define LEFT 1
 #define RIGHT 2
-#define WINNING_SCORE 9;
+#define WINNING_SCORE 9
 
 int play_pong_round();
 

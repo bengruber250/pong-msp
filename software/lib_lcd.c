@@ -7,6 +7,8 @@
 #define max_f_size		8		// max. font cache size for resize function
 #define meta_w_size		64		// metaballs
 
+
+#define MIN(x,y)  (x < y ? x : y)
 unsigned char byte,bit_num;		// global buffer and bit index
 unsigned int h_index,w_index;	// global width_index and height_index
 
@@ -420,21 +422,31 @@ void fill_display(unsigned char width, unsigned char height, unsigned char byte)
 	}
 }
 
-void draw_rect(unsigned char x, unsigned char y, unsigned char width, unsigned char height)
+void draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height)
 {
     int address, i;
     unsigned char top_byte = 0xFF, bot_byte = 0xFF;
     // Shift top_byte left by offset
     // Shift bot_byte right by offset w/o sign extension
     int top_address = y >> 3; // Y / 8
+    top_address = MIN(top_address, 7);
     int offset_top = y - (top_address << 3);
 
     int bot_address = (y + height) >> 3;
-    int offset_bot = 8 - (y + height) - (bot_address << 3);
-//    int offset_bot = (1 + bot_address) << 3 - (y + height);
+    bot_address = MIN(bot_address, 7);
+    int offset_bot = 8 - ((y + height) - (bot_address << 3));
 
     top_byte <<= offset_top;
     bot_byte >>= offset_bot;
+
+    if (bot_address == top_address) {
+        bot_byte = bot_byte & top_byte;
+        /* Write bot. */
+        set_cursor(x, bot_address);
+        for(i = width; i > 0; i--)
+            set_instruction(1, bot_byte);
+        return;
+    }
 
 
     /* Write top. */
@@ -453,6 +465,7 @@ void draw_rect(unsigned char x, unsigned char y, unsigned char width, unsigned c
     set_cursor(x, bot_address);
     for(i = width; i > 0; i--)
         set_instruction(1, bot_byte);
+
 }
 
 /*

@@ -56,7 +56,7 @@ void set_cursor(unsigned char,unsigned char);
 void fill_display(unsigned char,unsigned char,unsigned char);
 void set_instruction(unsigned char,unsigned char);
 void init_USCI(void);
-void draw_rect(unsigned char x, unsigned char y, unsigned char width, unsigned char height);
+void draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
 /*
  *
  */

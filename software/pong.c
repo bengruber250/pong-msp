@@ -13,11 +13,13 @@ static int tick()
 {
     // Check for collisions and update ball velocities.
     if (check_vertical_collisions()) {
-        // Update ball vertical velocity.
+        // Update ball vertical velocity
+        // Don't forget to redraw things.
     }
     if (side = check_horizontal_collisions()) {
         if (ball_in_paddle_range(side)) {
             // Bounce and impart velocity of paddle.
+            // Don't forget to redraw things.
         }
         // return LEFT/RIGHT.
     }

@@ -1,8 +1,6 @@
 /*
- * pong.c
+ * main.c
  *
- *  Created on: Apr 28, 2019
- *      Author: root
  */
 #include <msp430g2553.h>
 #include "buttons.h"

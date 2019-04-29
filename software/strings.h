@@ -1,8 +1,6 @@
 /*
  * strings.h
  *
- *  Created on: Apr 29, 2019
- *      Author: root
  */
 
 #ifndef STRINGS_H_

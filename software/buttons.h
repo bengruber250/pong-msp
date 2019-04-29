@@ -1,8 +1,6 @@
 /*
  * buttons.h
  *
- *  Created on: Apr 29, 2019
- *      Author: root
  */
 
 #ifndef BUTTONS_H_

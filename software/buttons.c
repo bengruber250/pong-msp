@@ -1,8 +1,6 @@
 /*
  * buttons.c
  *
- *  Created on: Apr 29, 2019
- *      Author: root
  */
 
 #include <msp430g2553.h>

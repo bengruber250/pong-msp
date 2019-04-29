@@ -13,7 +13,7 @@ signed int x=128,y=0,x1=128,y1=0,x2=128,y2=127;
 unsigned char time_ms=80;
 struct meta_b m_balls[meta_size];
 
-void main(void)
+void main_example(void)
 {
 	WDTCTL=WDTPW+WDTHOLD;	
 	BCSCTL1=CALBC1_16MHZ; 

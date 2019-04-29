@@ -1,1 +1,1 @@
-"./delay.obj" "./init_SSD1306.obj" "./lib_lcd.obj" "./lib_math.obj" "./main.obj" "../lnk_msp430g2553.cmd" -llibc.a 
+"./buttons.obj" "./delay.obj" "./german_example.obj" "./init_SSD1306.obj" "./lib_lcd.obj" "./lib_math.obj" "./main.obj" "../lnk_msp430g2553.cmd" -llibc.a 

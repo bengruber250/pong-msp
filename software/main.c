@@ -16,6 +16,16 @@
 static int score_left = 0;
 static int score_right = 0;
 
+static void display_score();
+static void init_display();
+static void init_pots();
+static void init_game();
+static void display_start();
+static void display_game_over(int winner);
+static int check_game_over();
+static void play_pong_round();
+static void display_score();
+
 int main()
 {
     WDTCTL=WDTPW+WDTHOLD;
@@ -45,7 +55,7 @@ int main()
 /*
  * Initializes the display.
  */
-void init_display()
+static void init_display()
 {
     init_ports();
     init_USCI();    // 4-wire SPI.
@@ -55,7 +65,7 @@ void init_display()
 /*
  * Initializes the potentiometers.
  */
-void init_pots()
+static void init_pots()
 {
  // Will come from other file.
 }
@@ -63,7 +73,7 @@ void init_pots()
 /*
  * Initializes the game state.
  */
-void init_game()
+static void init_game()
 {
     score_left = 0;
     score_right = 0;
@@ -72,7 +82,7 @@ void init_game()
 /*
  * Displays a starting screen.
  */
-void display_start()
+static void display_start()
 {
     fill_display(lcd_width,lcd_height,0x00); // Clear display.
     write_string(2,3,str_title,2); // Write title.
@@ -83,7 +93,7 @@ void display_start()
  * winner must be either LEFT or RIGHT.
  * Displays a message to celebrate the winner.
  */
-void display_game_over(int winner)
+static void display_game_over(int winner)
 {
 
 }
@@ -93,7 +103,7 @@ void display_game_over(int winner)
  * LEFT if the left player has won, and
  * RIGHT if the right player has won.
  */
-int check_game_over()
+static int check_game_over()
 {
 
 }
@@ -102,7 +112,7 @@ int check_game_over()
  * Plays a single round of pong, incrementing either
  * score_left or score_right depending on the winner.
  */
-void play_pong_round()
+static void play_pong_round()
 {
 
 }
@@ -111,10 +121,15 @@ void play_pong_round()
  * Displays the current score.
  * Can only display one digit scores.
  */
-void display_score()
+static void display_score()
 {
-    static char[] scoreStr = "0-0";
+    static char score_str[] = "0-0";
 
+    score_str[0] = score_left + '0';
+    score_str[2] = score_right + '0';
+
+    fill_display(lcd_width,lcd_height,0x00); // Clear display.
+    write_string(2,3,score_str,3); // Write title.
 }
 
 

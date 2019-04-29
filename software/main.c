@@ -31,7 +31,7 @@ void main(void)
     while (1) {
         ADC10CTL0 |= ADC10SC | ENC;
         __bis_SR_register(CPUOFF+GIE);
-        ADC10DTC1 = 0x01;
+        ADC10DTC1 = 0x02;
         ADC10SA = (int)pot_vals;
         pot1 = pot_vals[0];
         pot2 = pot_vals[1];
@@ -46,11 +46,11 @@ void init_adc10(void)
     /* 16 cycle sample, multi sample, interrupt enable. */
     ADC10CTL0 = ADC10SHT_2 | ADC10IE | MSC | ADC10ON;
     /* Enable channels A0-A2. */
-    ADC10AE0 = BIT1;
+    ADC10AE0 = BIT1 | BIT2;
     /* Enable data transfer controller in continous, 2 block mode. */
 //    ADC10DTC0 = ADC10CT;
     /* 3 transfers per block:  transfers 1 and 2 are channels A2 and A1. */
-    ADC10DTC1 = 0x01;
+    ADC10DTC1 = 0x02;
     /* Start address for transfers */
     ADC10SA = (int)pot_vals;
     /* Start ADC. */

@@ -11,6 +11,7 @@
 
 #define LEFT 1
 #define RIGHT 2
+#define WINNING_SCORE 9;
 
 
 static int score_left = 0;
@@ -112,10 +113,12 @@ static void display_game_over(int winner)
  */
 static int check_game_over()
 {
-
-
-    fill_display(lcd_width,lcd_height,0x00); // Clear display.
-    write_string(2,3,score_str,2); // Write title.
+    if (score_left == WINNING_SCORE)
+        return LEFT;
+    else if (score_right == WINNING_SCORE)
+        return RIGHT;
+    else
+        return 0;
 }
 
 /*

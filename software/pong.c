@@ -32,7 +32,8 @@ static int tick()
 
 }
 
-int play_pong_round(){
+int play_pong_round()
+{
     int winner;
     while(!(winner = tick()));
     return winner;

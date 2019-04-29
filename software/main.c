@@ -5,8 +5,12 @@
 #include "delay.h"
 #include "fuck.h"
 
+#define KNBP P1
+#define KNB1 BIT1
+#define KNB2 BIT2
 
-void init_adc(void);
+
+void init_adc10(void);
 
 void main(void)
 {
@@ -18,14 +22,23 @@ void main(void)
     init_ports();
     init_USCI();    // for 4-wire SPI, comment out for 8080
     init_LCD();
+    init_adc10();
 
-
+    
 
 
 }
 
 
-void init_adc(void)
+void init_adc10(void)
 {
+    ADC10CTL0
+    ADC10CTL1
+    ADC10AE0
+    
+    // SHTx config so that t_sample is 8 clk cycles when driven by 
+    // SMCLK at 1 MHz
+    // Or 64 when driven by internal 5 MHz clk
+    
 
 }

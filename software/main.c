@@ -5,6 +5,7 @@
  *      Author: root
  */
 #include <msp430g2553.h>
+#include "buttons.h"
 #include "lib_lcd.h"
 #include "strings.h"
 
@@ -30,9 +31,12 @@ int main()
     while (1) {
        init_game();
        display_start();
+       wait_for_button_press();
+
        while(!(winner = check_game_over())){
            play_pong_round();
            display_score();
+           wait_for_button_press();
        }
        display_game_over(winner);
     }
@@ -52,14 +56,6 @@ void init_display()
  * Initializes the potentiometers.
  */
 void init_pots()
-{
- // Will come from other file.
-}
-
-/*
- * Initializes the buttons.
- */
-void init_buttons()
 {
  // Will come from other file.
 }
@@ -113,9 +109,11 @@ void play_pong_round()
 
 /*
  * Displays the current score.
+ * Can only display one digit scores.
  */
 void display_score()
 {
+    static char[] scoreStr = "0-0";
 
 }
 

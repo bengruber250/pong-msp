@@ -5,11 +5,9 @@
 #include <msp430g2553.h>
 #include "buttons.h"
 #include "lib_lcd.h"
+#include "pong.h"
 #include "strings.h"
 
-#define LEFT 1
-#define RIGHT 2
-#define WINNING_SCORE 9;
 
 
 static int score_left = 0;

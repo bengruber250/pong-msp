@@ -53,7 +53,7 @@ void init_display()
  */
 void init_pots()
 {
-
+ // Will come from other file.
 }
 
 /*
@@ -61,7 +61,7 @@ void init_pots()
  */
 void init_buttons()
 {
-
+ // Will come from other file.
 }
 
 /*

@@ -8,8 +8,9 @@
 const char str_title[] = "** PONG! **";
 const char str_subtitle[] = "Press any button to";
 const char str_subtitle2[] = "begin.";
-const char str_left_winner[] = "Player 1 wins!";
-const char str_right_winner[] = "Player 2 wins!";
+const char str_continue[] = "continue.";
+const char str_left_winner[] = "Left wins!";
+const char str_right_winner[] = "Right wins!";
 
 
 #endif /* STRINGS_H_ */

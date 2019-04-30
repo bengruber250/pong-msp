@@ -21,6 +21,7 @@ static void display_start();
 static void display_game_over(int winner);
 static int check_game_over();
 static void display_score();
+static void update_score( int winner);
 
 int main()
 {
@@ -41,11 +42,14 @@ int main()
        wait_for_button_press();
 
        while(!(winner = check_game_over())){
-           play_pong_round();
+           int loser = play_pong_round();
+           update_score(loser);
            display_score();
            wait_for_button_press();
        }
        display_game_over(winner);
+       wait_for_button_press();
+       __delay_cycles(1000000);
     }
 }
 
@@ -92,7 +96,8 @@ static void display_game_over(int winner)
         to_display = str_right_winner;
 
     fill_display(lcd_width,lcd_height,0x00); // Clear display.
-    write_string(2,3,to_display,1); // Write winner string.
+//    write_string(2,3,to_display,1); // Write winner string.
+    draw_string_sin_fixed(2, 3, to_display, 4, 1);
 }
 
 /*
@@ -122,7 +127,19 @@ static void display_score()
     score_str[9] = score_right + '0';
 
     fill_display(lcd_width,lcd_height,0x00); // Clear display.
-    write_string(2,4,score_str,1); // Write title.
+    write_string(2,3,score_str,2); // Write score.
+
+    write_small_string(1, 6, str_subtitle, 0); // pabt.
+    write_small_string(1, 7, str_continue, 0); // cont.
+}
+
+static void update_score(int loser)
+{
+    if (loser == LEFT)
+        score_right++;
+    else if (loser == RIGHT)
+        score_left++;
+
 }
 
 

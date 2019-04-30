@@ -27,7 +27,8 @@ static void update_score( int winner);
 
 int main()
 {
-    WDTCTL=WDTPW+WDTHOLD;
+    WDTCTL = WDT_MDLY_8;
+    IE1 |= WDTIE;
     BCSCTL1=CALBC1_16MHZ;
 //    BCSCTL2 |= DIVS_3;
     DCOCTL=CALDCO_16MHZ;
@@ -144,7 +145,20 @@ static void update_score(int loser)
         score_right++;
     else if (loser == RIGHT)
         score_left++;
+}
 
+// Watchdog Timer interrupt service routine
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector=WDT_VECTOR
+__interrupt void watchdog_timer(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(WDT_VECTOR))) watchdog_timer (void)
+#else
+#error Compiler not supported!
+#endif
+{
+    /* Constantly shuffle the lfsr */
+    rand();
 }
 
 

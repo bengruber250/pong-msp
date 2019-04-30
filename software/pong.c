@@ -6,6 +6,7 @@
 #include "pong.h"
 #include "pots.h"
 #include "lib_lcd.h"
+#include "erandom.h"
 
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
 
@@ -45,6 +46,7 @@ static int tick()
             // Bounce and impart velocity of paddle.
             // Don't forget to redraw things.
             ball_vx = -ball_vx;
+            ball_vy = ball_vy + (int)rand();
         } else {
             clear_display();
             draw_ball_and_paddles(in_range); //Both visible even if clipping.

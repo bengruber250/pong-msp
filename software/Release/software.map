@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker Unix v18.1.5                   
 ******************************************************************************
->> Linked Mon Apr 29 21:21:48 2019
+>> Linked Mon Apr 29 21:32:17 2019
 
 OUTPUT FILE NAME:   <software.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c71a
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0000c77c
 
 
 MEMORY CONFIGURATION
@@ -14,12 +14,12 @@ MEMORY CONFIGURATION
   SFR                   00000000   00000010  00000000  00000010  RWIX
   PERIPHERALS_8BIT      00000010   000000f0  00000000  000000f0  RWIX
   PERIPHERALS_16BIT     00000100   00000100  00000000  00000100  RWIX
-  RAM                   00000200   00000200  00000064  0000019c  RWIX
+  RAM                   00000200   00000200  0000006c  00000194  RWIX
   INFOD                 00001000   00000040  00000000  00000040  RWIX
   INFOC                 00001040   00000040  00000000  00000040  RWIX
   INFOB                 00001080   00000040  00000000  00000040  RWIX
   INFOA                 000010c0   00000040  00000000  00000040  RWIX
-  FLASH                 0000c000   00003fde  00000b6f  0000346f  RWIX
+  FLASH                 0000c000   00003fde  00000be9  000033f5  RWIX
   BSLSIGNATURE          0000ffde   00000002  00000002  00000000  RWIX  ffff 
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000000  00000002  RWIX
@@ -44,86 +44,88 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.bss       0    00000200    0000000a     UNINITIALIZED
-                  00000200    00000004     pong.obj (.bss)
-                  00000204    00000004     (.common:pot_vals)
-                  00000208    00000001     (.common:bit_num)
-                  00000209    00000001     (.common:byte)
+.bss       0    00000200    00000012     UNINITIALIZED
+                  00000200    0000000c     pong.obj (.bss)
+                  0000020c    00000004     (.common:pot_vals)
+                  00000210    00000001     (.common:bit_num)
+                  00000211    00000001     (.common:byte)
 
-.data      0    0000020a    0000000a     UNINITIALIZED
-                  0000020a    00000004     main.obj (.data)
-                  0000020e    00000004     main.obj (.data:score_str$1)
-                  00000212    00000002     buttons.obj (.data)
+.data      0    00000212    0000000a     UNINITIALIZED
+                  00000212    00000004     main.obj (.data)
+                  00000216    00000004     main.obj (.data:score_str$1)
+                  0000021a    00000002     buttons.obj (.data)
 
 .stack     0    000003b0    00000050     UNINITIALIZED
                   000003b0    00000002     rts430_eabi.lib : boot.c.obj (.stack)
                   000003b2    0000004e     --HOLE--
 
-.text      0    0000c000    00000876     
+.text      0    0000c000    000008f0     
                   0000c000    00000178     lib_lcd.obj (.text:convert_font_size)
                   0000c178    000000ec     lib_lcd.obj (.text:draw_rect)
                   0000c264    00000084     lib_lcd.obj (.text:write_string)
                   0000c2e8    0000007c     rts430_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  0000c364    0000004c                     : lsr16.asm.obj (.text)
-                  0000c3b0    00000046     main.obj (.text:main)
-                  0000c3f6    00000042     rts430_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
-                  0000c438    0000003e     lib_lcd.obj (.text:fill_display)
-                  0000c476    0000003e     pong.obj (.text:update_paddle_positions)
-                  0000c4b4    00000038     main.obj (.text:display_score)
-                  0000c4ec    00000038     init_SSD1306.obj (.text:init_LCD)
-                  0000c524    00000034     main.obj (.text:display_game_over)
-                  0000c558    0000002e     main.obj (.text:display_start)
-                  0000c586    0000002c     lib_lcd.obj (.text:init_USCI)
-                  0000c5b2    0000002c     rts430_eabi.lib : asr16.asm.obj (.text)
-                  0000c5de    0000002c                     : lsl16.asm.obj (.text)
-                  0000c60a    0000002c     lib_lcd.obj (.text:set_cursor)
-                  0000c636    00000028     pong.obj (.text:play_pong_round)
-                  0000c65e    00000022     pong.obj (.text:draw_paddles)
-                  0000c680    00000022     pong.obj (.text:map)
-                  0000c6a2    00000020     buttons.obj (.text:init_buttons)
-                  0000c6c2    0000001e     pots.obj (.text:init_pots)
-                  0000c6e0    0000001e     lib_lcd.obj (.text:set_instruction)
-                  0000c6fe    0000001c     buttons.obj (.text:Port_2)
-                  0000c71a    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
-                  0000c736    0000001c     main.obj (.text:check_game_over)
-                  0000c752    00000018     pots.obj (.text:get_pots)
-                  0000c76a    00000018     lib_lcd.obj (.text:send_data_array)
-                  0000c782    00000016     rts430_eabi.lib : div16u.asm.obj (.text)
-                  0000c798    00000016     delay.obj (.text:wait_ms)
-                  0000c7ae    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  0000c7c2    00000014                     : mult16.asm.obj (.text)
-                  0000c7d6    00000012                     : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  0000c7e8    00000012                     : memcpy.c.obj (.text:memcpy)
-                  0000c7fa    00000010     init_SSD1306.obj (.text:init_ports)
-                  0000c80a    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
-                  0000c81a    00000010     pong.obj (.text:tick)
-                  0000c82a    0000000e     pong.obj (.text:clear_display)
-                  0000c838    0000000c     main.obj (.text:init_display)
-                  0000c844    0000000a     lib_lcd.obj (.text:USCI)
-                  0000c84e    0000000a     main.obj (.text:init_game)
-                  0000c858    0000000a     buttons.obj (.text:wait_for_button_press)
-                  0000c862    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
-                  0000c86a    00000006                     : exit.c.obj (.text:abort)
-                  0000c870    00000004                     : pre_init.c.obj (.text:_system_pre_init)
-                  0000c874    00000002                     : startup.c.obj (.text:_system_post_cinit)
+                  0000c364    0000004e     pong.obj (.text:update_ball_position)
+                  0000c3b2    0000004c     rts430_eabi.lib : lsr16.asm.obj (.text)
+                  0000c3fe    00000046     main.obj (.text:main)
+                  0000c444    00000042     rts430_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  0000c486    0000003e     lib_lcd.obj (.text:fill_display)
+                  0000c4c4    0000003e     pong.obj (.text:update_paddle_positions)
+                  0000c502    0000003c     pong.obj (.text:play_pong_round)
+                  0000c53e    00000038     main.obj (.text:display_score)
+                  0000c576    00000038     init_SSD1306.obj (.text:init_LCD)
+                  0000c5ae    00000034     main.obj (.text:display_game_over)
+                  0000c5e2    0000002e     main.obj (.text:display_start)
+                  0000c610    0000002c     lib_lcd.obj (.text:init_USCI)
+                  0000c63c    0000002c     rts430_eabi.lib : asr16.asm.obj (.text)
+                  0000c668    0000002c                     : lsl16.asm.obj (.text)
+                  0000c694    0000002c     lib_lcd.obj (.text:set_cursor)
+                  0000c6c0    00000022     pong.obj (.text:draw_paddles)
+                  0000c6e2    00000022     pong.obj (.text:map)
+                  0000c704    00000020     buttons.obj (.text:init_buttons)
+                  0000c724    0000001e     pots.obj (.text:init_pots)
+                  0000c742    0000001e     lib_lcd.obj (.text:set_instruction)
+                  0000c760    0000001c     buttons.obj (.text:Port_2)
+                  0000c77c    0000001c     rts430_eabi.lib : boot.c.obj (.text:_c_int00_noargs)
+                  0000c798    0000001c     main.obj (.text:check_game_over)
+                  0000c7b4    00000018     pots.obj (.text:get_pots)
+                  0000c7cc    00000018     lib_lcd.obj (.text:send_data_array)
+                  0000c7e4    00000018     pong.obj (.text:tick)
+                  0000c7fc    00000016     rts430_eabi.lib : div16u.asm.obj (.text)
+                  0000c812    00000016     delay.obj (.text:wait_ms)
+                  0000c828    00000014     rts430_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  0000c83c    00000014                     : mult16.asm.obj (.text)
+                  0000c850    00000012                     : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  0000c862    00000012                     : memcpy.c.obj (.text:memcpy)
+                  0000c874    00000010     pong.obj (.text:draw_ball)
+                  0000c884    00000010     init_SSD1306.obj (.text:init_ports)
+                  0000c894    00000010     rts430_eabi.lib : epilog.asm.obj (.text)
+                  0000c8a4    0000000e     pong.obj (.text:clear_display)
+                  0000c8b2    0000000c     main.obj (.text:init_display)
+                  0000c8be    0000000a     lib_lcd.obj (.text:USCI)
+                  0000c8c8    0000000a     main.obj (.text:init_game)
+                  0000c8d2    0000000a     buttons.obj (.text:wait_for_button_press)
+                  0000c8dc    00000008     rts430_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  0000c8e4    00000006                     : exit.c.obj (.text:abort)
+                  0000c8ea    00000004                     : pre_init.c.obj (.text:_system_pre_init)
+                  0000c8ee    00000002                     : startup.c.obj (.text:_system_post_cinit)
 
-.const     0    0000c876    000002db     
-                  0000c876    00000280     lib_lcd.obj (.const:ascii_table)
-                  0000caf6    0000001b     main.obj (.const:.string:str_subtitle)
-                  0000cb11    00000001     --HOLE-- [fill = 0]
-                  0000cb12    00000019     init_SSD1306.obj (.const:.string:init_cmd_array)
-                  0000cb2b    00000001     --HOLE-- [fill = 0]
-                  0000cb2c    0000000f     main.obj (.const:.string:str_left_winner)
-                  0000cb3b    00000001     --HOLE-- [fill = 0]
-                  0000cb3c    0000000f     main.obj (.const:.string:str_right_winner)
-                  0000cb4b    00000001     --HOLE-- [fill = 0]
-                  0000cb4c    00000005     main.obj (.const:.string:str_title)
+.const     0    0000c8f0    000002db     
+                  0000c8f0    00000280     lib_lcd.obj (.const:ascii_table)
+                  0000cb70    0000001b     main.obj (.const:.string:str_subtitle)
+                  0000cb8b    00000001     --HOLE-- [fill = 0]
+                  0000cb8c    00000019     init_SSD1306.obj (.const:.string:init_cmd_array)
+                  0000cba5    00000001     --HOLE-- [fill = 0]
+                  0000cba6    0000000f     main.obj (.const:.string:str_left_winner)
+                  0000cbb5    00000001     --HOLE-- [fill = 0]
+                  0000cbb6    0000000f     main.obj (.const:.string:str_right_winner)
+                  0000cbc5    00000001     --HOLE-- [fill = 0]
+                  0000cbc6    00000005     main.obj (.const:.string:str_title)
 
-.cinit     0    0000cb52    0000001e     
-                  0000cb52    0000000c     (.cinit..data.load) [load image, compression = lzss]
-                  0000cb5e    00000006     (__TI_handler_table)
-                  0000cb64    00000004     (.cinit..bss.load) [load image, compression = zero_init]
-                  0000cb68    00000008     (__TI_cinit_table)
+.cinit     0    0000cbcc    0000001e     
+                  0000cbcc    0000000c     (.cinit..data.load) [load image, compression = lzss]
+                  0000cbd8    00000006     (__TI_handler_table)
+                  0000cbde    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  0000cbe2    00000008     (__TI_cinit_table)
 
 .binit     0    0000c000    00000000     
 
@@ -189,13 +191,13 @@ MODULE SUMMARY
     ./
        lib_lcd.obj                  958    642       2      
        main.obj                     274    62        8      
-       pong.obj                     200    0         4      
+       pong.obj                     322    0         12     
        init_SSD1306.obj             72     25        0      
        buttons.obj                  70     2         2      
        pots.obj                     54     0         4      
        delay.obj                    22     0         0      
     +--+----------------------------+------+---------+---------+
-       Total:                       1650   731       20     
+       Total:                       1772   731       28     
                                                             
     /home/ben/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.5.LTS/lib/rts430_eabi.lib
        copy_decompress_lzss.c.obj   124    0         0      
@@ -231,19 +233,19 @@ MODULE SUMMARY
        Stack:                       0      0         80     
        Linker Generated:            0      30        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 2166   785       100    
+       Grand Total:                 2288   785       108    
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000cb68 records: 2, size/record: 4, table size: 8
-	.data: load addr=0000cb52, load size=0000000c bytes, run addr=0000020a, run size=0000000a bytes, compression=lzss
-	.bss: load addr=0000cb64, load size=00000004 bytes, run addr=00000200, run size=0000000a bytes, compression=zero_init
+__TI_cinit_table @ 0000cbe2 records: 2, size/record: 4, table size: 8
+	.data: load addr=0000cbcc, load size=0000000c bytes, run addr=00000212, run size=0000000a bytes, compression=lzss
+	.bss: load addr=0000cbde, load size=00000004 bytes, run addr=00000200, run size=00000012 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 0000cb5e records: 3, size/record: 2, table size: 6
+__TI_handler_table @ 0000cbd8 records: 3, size/record: 2, table size: 6
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_lzss
 	index: 2, handler: __TI_decompress_none
@@ -263,7 +265,7 @@ address   name
 00000057  BCSCTL1                       
 00000058  BCSCTL2                       
 00000053  BCSCTL3                       
-0000c86a  C$$EXIT                       
+0000c8e4  C$$EXIT                       
 00000059  CACTL1                        
 0000005a  CACTL2                        
 000010fb  CALBC1_12MHZ                  
@@ -307,7 +309,7 @@ address   name
 00000010  P3REN                         
 0000001b  P3SEL                         
 00000043  P3SEL2                        
-0000c6fe  Port_2                        
+0000c760  Port_2                        
 00000172  TA0CCR0                       
 00000174  TA0CCR1                       
 00000176  TA0CCR2                       
@@ -352,18 +354,18 @@ address   name
 0000006e  UCB0RXBUF                     
 0000006d  UCB0STAT                      
 0000006f  UCB0TXBUF                     
-0000c844  USCI                          
+0000c8be  USCI                          
 00000120  WDTCTL                        
 00000400  __STACK_END                   
 00000050  __STACK_SIZE                  
-0000cb68  __TI_CINIT_Base               
-0000cb70  __TI_CINIT_Limit              
-0000cb5e  __TI_Handler_Table_Base       
-0000cb64  __TI_Handler_Table_Limit      
-0000c862  __TI_ISR_TRAP                 
-0000c3f6  __TI_auto_init_nobinit_nopinit
+0000cbe2  __TI_CINIT_Base               
+0000cbea  __TI_CINIT_Limit              
+0000cbd8  __TI_Handler_Table_Base       
+0000cbde  __TI_Handler_Table_Limit      
+0000c8dc  __TI_ISR_TRAP                 
+0000c444  __TI_auto_init_nobinit_nopinit
 0000c2e8  __TI_decompress_lzss          
-0000c7d6  __TI_decompress_none          
+0000c850  __TI_decompress_none          
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    
@@ -380,99 +382,99 @@ address   name
 ffffffff  __TI_pprof_out_hndl           
 ffffffff  __TI_prof_data_size           
 ffffffff  __TI_prof_data_start          
-0000c7ae  __TI_zero_init_nomemset       
+0000c828  __TI_zero_init_nomemset       
 ffffffff  __c_args__                    
-0000c782  __mspabi_divu                 
-0000c816  __mspabi_func_epilog_1        
-0000c814  __mspabi_func_epilog_2        
-0000c812  __mspabi_func_epilog_3        
-0000c810  __mspabi_func_epilog_4        
-0000c80e  __mspabi_func_epilog_5        
-0000c80c  __mspabi_func_epilog_6        
-0000c80a  __mspabi_func_epilog_7        
-0000c7c2  __mspabi_mpyi                 
-0000c7c2  __mspabi_mpyi_sw              
-0000c782  __mspabi_remu                 
-0000c5de  __mspabi_slli                 
-0000c606  __mspabi_slli_1               
-0000c5f4  __mspabi_slli_10              
-0000c5f2  __mspabi_slli_11              
-0000c5f0  __mspabi_slli_12              
-0000c5ee  __mspabi_slli_13              
-0000c5ec  __mspabi_slli_14              
-0000c5ea  __mspabi_slli_15              
-0000c604  __mspabi_slli_2               
-0000c602  __mspabi_slli_3               
-0000c600  __mspabi_slli_4               
-0000c5fe  __mspabi_slli_5               
-0000c5fc  __mspabi_slli_6               
-0000c5fa  __mspabi_slli_7               
-0000c5f8  __mspabi_slli_8               
-0000c5f6  __mspabi_slli_9               
-0000c5b2  __mspabi_srai                 
-0000c5da  __mspabi_srai_1               
-0000c5c8  __mspabi_srai_10              
-0000c5c6  __mspabi_srai_11              
-0000c5c4  __mspabi_srai_12              
-0000c5c2  __mspabi_srai_13              
-0000c5c0  __mspabi_srai_14              
-0000c5be  __mspabi_srai_15              
-0000c5d8  __mspabi_srai_2               
-0000c5d6  __mspabi_srai_3               
-0000c5d4  __mspabi_srai_4               
-0000c5d2  __mspabi_srai_5               
-0000c5d0  __mspabi_srai_6               
-0000c5ce  __mspabi_srai_7               
-0000c5cc  __mspabi_srai_8               
-0000c5ca  __mspabi_srai_9               
-0000c364  __mspabi_srli                 
-0000c3aa  __mspabi_srli_1               
-0000c386  __mspabi_srli_10              
-0000c382  __mspabi_srli_11              
-0000c37e  __mspabi_srli_12              
-0000c37a  __mspabi_srli_13              
-0000c376  __mspabi_srli_14              
-0000c372  __mspabi_srli_15              
-0000c3a6  __mspabi_srli_2               
-0000c3a2  __mspabi_srli_3               
-0000c39e  __mspabi_srli_4               
-0000c39a  __mspabi_srli_5               
-0000c396  __mspabi_srli_6               
-0000c392  __mspabi_srli_7               
-0000c38e  __mspabi_srli_8               
-0000c38a  __mspabi_srli_9               
-0000c71a  _c_int00_noargs               
+0000c7fc  __mspabi_divu                 
+0000c8a0  __mspabi_func_epilog_1        
+0000c89e  __mspabi_func_epilog_2        
+0000c89c  __mspabi_func_epilog_3        
+0000c89a  __mspabi_func_epilog_4        
+0000c898  __mspabi_func_epilog_5        
+0000c896  __mspabi_func_epilog_6        
+0000c894  __mspabi_func_epilog_7        
+0000c83c  __mspabi_mpyi                 
+0000c83c  __mspabi_mpyi_sw              
+0000c7fc  __mspabi_remu                 
+0000c668  __mspabi_slli                 
+0000c690  __mspabi_slli_1               
+0000c67e  __mspabi_slli_10              
+0000c67c  __mspabi_slli_11              
+0000c67a  __mspabi_slli_12              
+0000c678  __mspabi_slli_13              
+0000c676  __mspabi_slli_14              
+0000c674  __mspabi_slli_15              
+0000c68e  __mspabi_slli_2               
+0000c68c  __mspabi_slli_3               
+0000c68a  __mspabi_slli_4               
+0000c688  __mspabi_slli_5               
+0000c686  __mspabi_slli_6               
+0000c684  __mspabi_slli_7               
+0000c682  __mspabi_slli_8               
+0000c680  __mspabi_slli_9               
+0000c63c  __mspabi_srai                 
+0000c664  __mspabi_srai_1               
+0000c652  __mspabi_srai_10              
+0000c650  __mspabi_srai_11              
+0000c64e  __mspabi_srai_12              
+0000c64c  __mspabi_srai_13              
+0000c64a  __mspabi_srai_14              
+0000c648  __mspabi_srai_15              
+0000c662  __mspabi_srai_2               
+0000c660  __mspabi_srai_3               
+0000c65e  __mspabi_srai_4               
+0000c65c  __mspabi_srai_5               
+0000c65a  __mspabi_srai_6               
+0000c658  __mspabi_srai_7               
+0000c656  __mspabi_srai_8               
+0000c654  __mspabi_srai_9               
+0000c3b2  __mspabi_srli                 
+0000c3f8  __mspabi_srli_1               
+0000c3d4  __mspabi_srli_10              
+0000c3d0  __mspabi_srli_11              
+0000c3cc  __mspabi_srli_12              
+0000c3c8  __mspabi_srli_13              
+0000c3c4  __mspabi_srli_14              
+0000c3c0  __mspabi_srli_15              
+0000c3f4  __mspabi_srli_2               
+0000c3f0  __mspabi_srli_3               
+0000c3ec  __mspabi_srli_4               
+0000c3e8  __mspabi_srli_5               
+0000c3e4  __mspabi_srli_6               
+0000c3e0  __mspabi_srli_7               
+0000c3dc  __mspabi_srli_8               
+0000c3d8  __mspabi_srli_9               
+0000c77c  _c_int00_noargs               
 0000fffe  _reset_vector                 
 000003b0  _stack                        
-0000c874  _system_post_cinit            
-0000c870  _system_pre_init              
-0000c86a  abort                         
-0000c876  ascii_table                   
-00000208  bit_num                       
-00000209  byte                          
+0000c8ee  _system_post_cinit            
+0000c8ea  _system_pre_init              
+0000c8e4  abort                         
+0000c8f0  ascii_table                   
+00000210  bit_num                       
+00000211  byte                          
 0000c000  convert_font_size             
 0000c178  draw_rect                     
-0000c438  fill_display                  
-0000c752  get_pots                      
-0000c4ec  init_LCD                      
-0000c586  init_USCI                     
-0000c6a2  init_buttons                  
-0000cb12  init_cmd_array                
-0000c7fa  init_ports                    
-0000c6c2  init_pots                     
-0000c3b0  main                          
-0000c7e8  memcpy                        
-0000c636  play_pong_round               
-00000204  pot_vals                      
-0000c76a  send_data_array               
-0000c60a  set_cursor                    
-0000c6e0  set_instruction               
-0000cb2c  str_left_winner               
-0000cb3c  str_right_winner              
-0000caf6  str_subtitle                  
-0000cb4c  str_title                     
-0000c858  wait_for_button_press         
-0000c798  wait_ms                       
+0000c486  fill_display                  
+0000c7b4  get_pots                      
+0000c576  init_LCD                      
+0000c610  init_USCI                     
+0000c704  init_buttons                  
+0000cb8c  init_cmd_array                
+0000c884  init_ports                    
+0000c724  init_pots                     
+0000c3fe  main                          
+0000c862  memcpy                        
+0000c502  play_pong_round               
+0000020c  pot_vals                      
+0000c7cc  send_data_array               
+0000c694  set_cursor                    
+0000c742  set_instruction               
+0000cba6  str_left_winner               
+0000cbb6  str_right_winner              
+0000cb70  str_subtitle                  
+0000cbc6  str_title                     
+0000c8d2  wait_for_button_press         
+0000c812  wait_ms                       
 0000c264  write_string                  
 
 
@@ -566,9 +568,9 @@ address   name
 000001b2  ADC10CTL1                     
 000001b4  ADC10MEM                      
 000001bc  ADC10SA                       
-00000204  pot_vals                      
-00000208  bit_num                       
-00000209  byte                          
+0000020c  pot_vals                      
+00000210  bit_num                       
+00000211  byte                          
 000003b0  _stack                        
 00000400  __STACK_END                   
 000010c0  TLV_CHECKSUM                  
@@ -588,101 +590,101 @@ address   name
 0000c178  draw_rect                     
 0000c264  write_string                  
 0000c2e8  __TI_decompress_lzss          
-0000c364  __mspabi_srli                 
-0000c372  __mspabi_srli_15              
-0000c376  __mspabi_srli_14              
-0000c37a  __mspabi_srli_13              
-0000c37e  __mspabi_srli_12              
-0000c382  __mspabi_srli_11              
-0000c386  __mspabi_srli_10              
-0000c38a  __mspabi_srli_9               
-0000c38e  __mspabi_srli_8               
-0000c392  __mspabi_srli_7               
-0000c396  __mspabi_srli_6               
-0000c39a  __mspabi_srli_5               
-0000c39e  __mspabi_srli_4               
-0000c3a2  __mspabi_srli_3               
-0000c3a6  __mspabi_srli_2               
-0000c3aa  __mspabi_srli_1               
-0000c3b0  main                          
-0000c3f6  __TI_auto_init_nobinit_nopinit
-0000c438  fill_display                  
-0000c4ec  init_LCD                      
-0000c586  init_USCI                     
-0000c5b2  __mspabi_srai                 
-0000c5be  __mspabi_srai_15              
-0000c5c0  __mspabi_srai_14              
-0000c5c2  __mspabi_srai_13              
-0000c5c4  __mspabi_srai_12              
-0000c5c6  __mspabi_srai_11              
-0000c5c8  __mspabi_srai_10              
-0000c5ca  __mspabi_srai_9               
-0000c5cc  __mspabi_srai_8               
-0000c5ce  __mspabi_srai_7               
-0000c5d0  __mspabi_srai_6               
-0000c5d2  __mspabi_srai_5               
-0000c5d4  __mspabi_srai_4               
-0000c5d6  __mspabi_srai_3               
-0000c5d8  __mspabi_srai_2               
-0000c5da  __mspabi_srai_1               
-0000c5de  __mspabi_slli                 
-0000c5ea  __mspabi_slli_15              
-0000c5ec  __mspabi_slli_14              
-0000c5ee  __mspabi_slli_13              
-0000c5f0  __mspabi_slli_12              
-0000c5f2  __mspabi_slli_11              
-0000c5f4  __mspabi_slli_10              
-0000c5f6  __mspabi_slli_9               
-0000c5f8  __mspabi_slli_8               
-0000c5fa  __mspabi_slli_7               
-0000c5fc  __mspabi_slli_6               
-0000c5fe  __mspabi_slli_5               
-0000c600  __mspabi_slli_4               
-0000c602  __mspabi_slli_3               
-0000c604  __mspabi_slli_2               
-0000c606  __mspabi_slli_1               
-0000c60a  set_cursor                    
-0000c636  play_pong_round               
-0000c6a2  init_buttons                  
-0000c6c2  init_pots                     
-0000c6e0  set_instruction               
-0000c6fe  Port_2                        
-0000c71a  _c_int00_noargs               
-0000c752  get_pots                      
-0000c76a  send_data_array               
-0000c782  __mspabi_divu                 
-0000c782  __mspabi_remu                 
-0000c798  wait_ms                       
-0000c7ae  __TI_zero_init_nomemset       
-0000c7c2  __mspabi_mpyi                 
-0000c7c2  __mspabi_mpyi_sw              
-0000c7d6  __TI_decompress_none          
-0000c7e8  memcpy                        
-0000c7fa  init_ports                    
-0000c80a  __mspabi_func_epilog_7        
-0000c80c  __mspabi_func_epilog_6        
-0000c80e  __mspabi_func_epilog_5        
-0000c810  __mspabi_func_epilog_4        
-0000c812  __mspabi_func_epilog_3        
-0000c814  __mspabi_func_epilog_2        
-0000c816  __mspabi_func_epilog_1        
-0000c844  USCI                          
-0000c858  wait_for_button_press         
-0000c862  __TI_ISR_TRAP                 
-0000c86a  C$$EXIT                       
-0000c86a  abort                         
-0000c870  _system_pre_init              
-0000c874  _system_post_cinit            
-0000c876  ascii_table                   
-0000caf6  str_subtitle                  
-0000cb12  init_cmd_array                
-0000cb2c  str_left_winner               
-0000cb3c  str_right_winner              
-0000cb4c  str_title                     
-0000cb5e  __TI_Handler_Table_Base       
-0000cb64  __TI_Handler_Table_Limit      
-0000cb68  __TI_CINIT_Base               
-0000cb70  __TI_CINIT_Limit              
+0000c3b2  __mspabi_srli                 
+0000c3c0  __mspabi_srli_15              
+0000c3c4  __mspabi_srli_14              
+0000c3c8  __mspabi_srli_13              
+0000c3cc  __mspabi_srli_12              
+0000c3d0  __mspabi_srli_11              
+0000c3d4  __mspabi_srli_10              
+0000c3d8  __mspabi_srli_9               
+0000c3dc  __mspabi_srli_8               
+0000c3e0  __mspabi_srli_7               
+0000c3e4  __mspabi_srli_6               
+0000c3e8  __mspabi_srli_5               
+0000c3ec  __mspabi_srli_4               
+0000c3f0  __mspabi_srli_3               
+0000c3f4  __mspabi_srli_2               
+0000c3f8  __mspabi_srli_1               
+0000c3fe  main                          
+0000c444  __TI_auto_init_nobinit_nopinit
+0000c486  fill_display                  
+0000c502  play_pong_round               
+0000c576  init_LCD                      
+0000c610  init_USCI                     
+0000c63c  __mspabi_srai                 
+0000c648  __mspabi_srai_15              
+0000c64a  __mspabi_srai_14              
+0000c64c  __mspabi_srai_13              
+0000c64e  __mspabi_srai_12              
+0000c650  __mspabi_srai_11              
+0000c652  __mspabi_srai_10              
+0000c654  __mspabi_srai_9               
+0000c656  __mspabi_srai_8               
+0000c658  __mspabi_srai_7               
+0000c65a  __mspabi_srai_6               
+0000c65c  __mspabi_srai_5               
+0000c65e  __mspabi_srai_4               
+0000c660  __mspabi_srai_3               
+0000c662  __mspabi_srai_2               
+0000c664  __mspabi_srai_1               
+0000c668  __mspabi_slli                 
+0000c674  __mspabi_slli_15              
+0000c676  __mspabi_slli_14              
+0000c678  __mspabi_slli_13              
+0000c67a  __mspabi_slli_12              
+0000c67c  __mspabi_slli_11              
+0000c67e  __mspabi_slli_10              
+0000c680  __mspabi_slli_9               
+0000c682  __mspabi_slli_8               
+0000c684  __mspabi_slli_7               
+0000c686  __mspabi_slli_6               
+0000c688  __mspabi_slli_5               
+0000c68a  __mspabi_slli_4               
+0000c68c  __mspabi_slli_3               
+0000c68e  __mspabi_slli_2               
+0000c690  __mspabi_slli_1               
+0000c694  set_cursor                    
+0000c704  init_buttons                  
+0000c724  init_pots                     
+0000c742  set_instruction               
+0000c760  Port_2                        
+0000c77c  _c_int00_noargs               
+0000c7b4  get_pots                      
+0000c7cc  send_data_array               
+0000c7fc  __mspabi_divu                 
+0000c7fc  __mspabi_remu                 
+0000c812  wait_ms                       
+0000c828  __TI_zero_init_nomemset       
+0000c83c  __mspabi_mpyi                 
+0000c83c  __mspabi_mpyi_sw              
+0000c850  __TI_decompress_none          
+0000c862  memcpy                        
+0000c884  init_ports                    
+0000c894  __mspabi_func_epilog_7        
+0000c896  __mspabi_func_epilog_6        
+0000c898  __mspabi_func_epilog_5        
+0000c89a  __mspabi_func_epilog_4        
+0000c89c  __mspabi_func_epilog_3        
+0000c89e  __mspabi_func_epilog_2        
+0000c8a0  __mspabi_func_epilog_1        
+0000c8be  USCI                          
+0000c8d2  wait_for_button_press         
+0000c8dc  __TI_ISR_TRAP                 
+0000c8e4  C$$EXIT                       
+0000c8e4  abort                         
+0000c8ea  _system_pre_init              
+0000c8ee  _system_post_cinit            
+0000c8f0  ascii_table                   
+0000cb70  str_subtitle                  
+0000cb8c  init_cmd_array                
+0000cba6  str_left_winner               
+0000cbb6  str_right_winner              
+0000cbc6  str_title                     
+0000cbd8  __TI_Handler_Table_Base       
+0000cbde  __TI_Handler_Table_Limit      
+0000cbe2  __TI_CINIT_Base               
+0000cbea  __TI_CINIT_Limit              
 0000ffe0  __TI_int00                    
 0000ffe4  __TI_int02                    
 0000ffe6  __TI_int03                    

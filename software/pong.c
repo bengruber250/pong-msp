@@ -7,6 +7,8 @@
 #include "pots.h"
 #include "lib_lcd.h"
 
+#define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+
 static int ball_x;
 static int ball_y;
 static int ball_vx;
@@ -58,6 +60,10 @@ static int check_vertical_collisions()
 
 int play_pong_round()
 {
+    ball_x = 12;
+    ball_y = 33;
+    ball_vx = 4;
+    ball_vy = -1;
     int winner;
     while(!(winner = tick())) {
         __delay_cycles(500000);
@@ -85,7 +91,8 @@ static void update_paddle_positions()
 
 static void update_ball_position()
 {
-    ;
+    ball_x = constrain(ball_x + ball_vx, 0, LCD_WIDTH - 1);
+    ball_y = constrain(ball_y + ball_vy, 0, LCD_HEIGHT - 1);
 }
 
 static void clear_display()
@@ -101,7 +108,7 @@ static void draw_paddles()
 
 static void draw_ball()
 {
-    ;
+    draw_rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE);
 }
 
 static unsigned int map(unsigned int x, unsigned int in_min, unsigned int in_max, unsigned int out_min, unsigned int out_max) {

@@ -9,6 +9,7 @@
 #define LEFT 1
 #define RIGHT 2
 #define WINNING_SCORE 9
+#define BALL_SIZE 1
 
 #define PADDLE_HEIGHT 10
 #define LCD_HEIGHT 64

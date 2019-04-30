@@ -103,7 +103,7 @@ static void display_game_over(int winner)
 
     fill_display(lcd_width,lcd_height,0x00); // Clear display.
 //    write_string(2,3,to_display,1); // Write winner string.
-    draw_string_sin_fixed(2, 3, to_display, 4, 1);
+    write_string(2, 3, to_display, 2);
 }
 
 /*

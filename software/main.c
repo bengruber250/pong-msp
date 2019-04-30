@@ -73,9 +73,10 @@ static void init_game()
  */
 static void display_start()
 {
-    fill_display(lcd_width,lcd_height,0x00); // Clear display.
-    write_string(2,3,str_title,2); // Write title.
-    write_string(2,6,str_subtitle,1); // Write subtitle.
+    fill_display(lcd_width, lcd_height, 0x00); // Clear display.
+    write_string(1, 2, str_title, 2); // Write title.
+    write_small_string(1, 6, str_subtitle, 0); // Write subtitle.
+    write_small_string(1, 7, str_subtitle2, 0); // Write subtitle.
 }
 
 /*
@@ -115,13 +116,13 @@ static int check_game_over()
  */
 static void display_score()
 {
-    static char score_str[] = "0-0";
+    static char score_str[] = "0   --   0";
 
     score_str[0] = score_left + '0';
-    score_str[2] = score_right + '0';
+    score_str[9] = score_right + '0';
 
     fill_display(lcd_width,lcd_height,0x00); // Clear display.
-    write_string(2,3,score_str,3); // Write title.
+    write_string(2,4,score_str,1); // Write title.
 }
 
 

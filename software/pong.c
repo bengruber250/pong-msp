@@ -63,7 +63,7 @@ int play_pong_round()
     ball_x = 12;
     ball_y = 33;
     ball_vx = 4;
-    ball_vy = -1;
+    ball_vy = -7;
     int winner;
     while(!(winner = tick())) {
         __delay_cycles(500000);

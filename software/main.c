@@ -5,6 +5,7 @@
 #include <msp430g2553.h>
 #include "buttons.h"
 #include "lib_lcd.h"
+#include "init_SSD1306.h"
 #include "pong.h"
 #include "pots.h"
 #include "strings.h"

@@ -9,6 +9,7 @@
 #include "pong.h"
 #include "pots.h"
 #include "strings.h"
+#include "erandom.h"
 
 
 
@@ -32,10 +33,12 @@ int main()
     DCOCTL=CALDCO_16MHZ;
 
     int winner;
-
+    init_rand_adc_seed();
+    ADC10CTL0 = 0x00;
     init_display();
     init_pots();
     init_buttons();
+
 
     while (1) {
        init_game();

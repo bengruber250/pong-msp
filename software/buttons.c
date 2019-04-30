@@ -9,7 +9,7 @@
 
 #define WAITING 1
 #define NOT_WAITING 0
-#define DEBOUNCE_CNTS 20
+#define DEBOUNCE_CNTS 500
 
 static int button_state = NOT_WAITING;
 

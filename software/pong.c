@@ -26,6 +26,7 @@ static void update_ball_position();
 static void clear_display();
 static void draw_paddles();
 static void draw_ball(int in_range);
+static void draw_ball_and_paddles(int in_range);
 
 static int tick()
 {
@@ -44,8 +45,11 @@ static int tick()
             // Bounce and impart velocity of paddle.
             // Don't forget to redraw things.
             ball_vx = -ball_vx;
-        } else
+        } else {
+            clear_display();
+            draw_ball_and_paddles(in_range); //Both visible even if clipping.
             return side;
+        }
     }
 
 
@@ -137,6 +141,22 @@ static void draw_ball(int in_range)
         return;
     draw_rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE);
 }
+
+static void draw_ball_and_paddles(int in_range)
+{
+    int i = 10000;
+    while(--i) {
+        if (i & 1) {
+            draw_paddles();
+            draw_ball(in_range);
+        } else {
+            draw_ball(in_range);
+            draw_paddles();
+        }
+
+    }
+}
+
 
 static unsigned int map(unsigned int x, unsigned int in_min, unsigned int in_max, unsigned int out_min, unsigned int out_max) {
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;

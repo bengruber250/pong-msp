@@ -34,13 +34,15 @@ static int tick()
     if (check_vertical_collisions()) {
         // Update ball vertical velocity
         // Don't forget to redraw things.
+        ball_vy = -ball_vy;
     }
     if (side = check_horizontal_collisions()) {
         if (ball_in_paddle_range(side)) {
             // Bounce and impart velocity of paddle.
             // Don't forget to redraw things.
-        }
-        // return LEFT/RIGHT.
+            ball_vx = -ball_vx;
+        } else
+            return side;
     }
 
     update_paddle_positions();
@@ -53,17 +55,23 @@ static int tick()
 
 }
 
+/*
+ * Returns 0 if no vertical collision and 1 otherwise.
+ */
 static int check_vertical_collisions()
 {
-    return 0;
+    if (ball_y == 0 || ball_y == (LCD_HEIGHT - 1))
+        return 1;
+    else
+        return 0;
 }
 
 int play_pong_round()
 {
     ball_x = 12;
-    ball_y = 33;
+    ball_y = 49;
     ball_vx = 4;
-    ball_vy = -7;
+    ball_vy = 2;
     int winner;
     while(!(winner = tick())) {
         __delay_cycles(500000);
@@ -71,14 +79,29 @@ int play_pong_round()
     return winner;
 }
 
+/*
+ * Returns LEFT if left horizontal collision,
+ * RIGHT if right, and 0 else.
+ */
 static int check_horizontal_collisions()
 {
-    return 0;
+    if (ball_x == 0)
+        return LEFT;
+    else if (ball_x == LCD_WIDTH - 1)
+        return RIGHT;
+    else
+        return 0;
 }
 
 static int ball_in_paddle_range(int side)
 {
-    return 0;
+    if (side == LEFT) {
+        return ((ball_y >= paddle_left_y) && (ball_y <= (paddle_left_y + PADDLE_HEIGHT)));
+    }
+    else if (side == RIGHT) {
+        return ((ball_y >= paddle_right_y) && (ball_y <= (paddle_right_y + PADDLE_HEIGHT)));
+    }
+    return -1;
 }
 
 static void update_paddle_positions()

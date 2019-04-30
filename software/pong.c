@@ -71,17 +71,25 @@ static int check_vertical_collisions()
         return 0;
 }
 
-int play_pong_round()
+int play_pong_round(int prev_loser)
 {
-    ball_x = 12;
-    ball_y = 49;
-    ball_vx = 4;
-    ball_vy = 2;
-    int winner;
-    while(!(winner = tick())) {
+    /* Right loses then left serves. */
+    if (prev_loser == RIGHT) {
+        ball_x = 12;
+        ball_y = 49;
+        ball_vx = 4;
+        ball_vy = 2;
+    } else {
+        ball_x = lcd_width - 12;
+        ball_y = 49;
+        ball_vx = -4;
+        ball_vy = 2;
+    }
+    int loser;
+    while(!(loser = tick())) {
         __delay_cycles(500000);
     }
-    return winner;
+    return loser;
 }
 
 /*

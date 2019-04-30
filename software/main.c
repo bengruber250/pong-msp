@@ -40,12 +40,13 @@ int main()
        init_game();
        display_start();
        wait_for_button_press();
-
+       int prev_loser = RIGHT;
        while(!(winner = check_game_over())){
-           int loser = play_pong_round();
+           int loser = play_pong_round(prev_loser);
            update_score(loser);
            display_score();
            wait_for_button_press();
+           prev_loser = loser;
        }
        display_game_over(winner);
        wait_for_button_press();

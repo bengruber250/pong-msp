@@ -15,7 +15,7 @@
 #define LCD_HEIGHT 64
 #define LCD_WIDTH 128
 
-int play_pong_round();
+int play_pong_round(int prev_winner);
 
 
 

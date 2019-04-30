@@ -34,7 +34,7 @@ void init_rand_adc_seed(void)
         srand(0xACE1);
 }
 
-unsigned int rand()
+inline unsigned int rand()
 {
     /*
      * Compute new LSB of shift register:
@@ -43,8 +43,7 @@ unsigned int rand()
      * x^32 + x^22 + x^2 + x^1 + 1
      *  (these are for 32 bit LFSR)
      */
-    uint16_t bit;
-    bit = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5));
+    uint16_t bit = ((lfsr >> 0) ^ (lfsr >> 2) ^ (lfsr >> 3) ^ (lfsr >> 5));
     /* Shift the register and OR in the new bit. */
     lfsr = (lfsr >> 1) | (bit << 15);
     /* Return only the bits that matter according to RAND_MAX */

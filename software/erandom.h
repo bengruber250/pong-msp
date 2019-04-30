@@ -21,7 +21,7 @@
 
 void init_rand_adc_seed(void);
 void srand(int seed);
-unsigned int rand(void);
+inline unsigned int rand(void);
 
 
 #endif /* ERANDOM_H_ */

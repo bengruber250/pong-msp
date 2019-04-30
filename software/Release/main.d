@@ -7,6 +7,8 @@ main.obj: /home/ben/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.5.LTS/include/int
 main.obj: /home/ben/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.5.LTS/include/intrinsics_legacy_undefs.h
 main.obj: ../buttons.h
 main.obj: ../lib_lcd.h
+main.obj: ../pong.h
+main.obj: ../pots.h
 main.obj: ../strings.h
 
 ../main.c: 
@@ -16,4 +18,6 @@ main.obj: ../strings.h
 /home/ben/ti/ccsv8/tools/compiler/ti-cgt-msp430_18.1.5.LTS/include/intrinsics_legacy_undefs.h: 
 ../buttons.h: 
 ../lib_lcd.h: 
+../pong.h: 
+../pots.h: 
 ../strings.h: 

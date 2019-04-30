@@ -10,6 +10,10 @@
 #define RIGHT 2
 #define WINNING_SCORE 9
 
+#define PADDLE_HEIGHT 10
+#define LCD_HEIGHT 64
+#define LCD_WIDTH 128
+
 int play_pong_round();
 
 

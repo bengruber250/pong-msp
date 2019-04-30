@@ -15,6 +15,8 @@ ORDERED_OBJS += \
 "./lib_lcd.obj" \
 "./lib_math.obj" \
 "./main.obj" \
+"./pong.obj" \
+"./pots.obj" \
 "../lnk_msp430g2553.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -158,8 +160,8 @@ software.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "buttons.obj" "delay.obj" "german_example.obj" "init_SSD1306.obj" "lib_lcd.obj" "lib_math.obj" "main.obj" 
-	-$(RM) "buttons.d" "delay.d" "german_example.d" "init_SSD1306.d" "lib_lcd.d" "lib_math.d" "main.d" 
+	-$(RM) "buttons.obj" "delay.obj" "german_example.obj" "init_SSD1306.obj" "lib_lcd.obj" "lib_math.obj" "main.obj" "pong.obj" "pots.obj" 
+	-$(RM) "buttons.d" "delay.d" "german_example.d" "init_SSD1306.d" "lib_lcd.d" "lib_math.d" "main.d" "pong.d" "pots.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

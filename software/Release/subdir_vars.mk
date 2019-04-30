@@ -13,7 +13,9 @@ C_SRCS += \
 ../init_SSD1306.c \
 ../lib_lcd.c \
 ../lib_math.c \
-../main.c 
+../main.c \
+../pong.c \
+../pots.c 
 
 C_DEPS += \
 ./buttons.d \
@@ -22,7 +24,9 @@ C_DEPS += \
 ./init_SSD1306.d \
 ./lib_lcd.d \
 ./lib_math.d \
-./main.d 
+./main.d \
+./pong.d \
+./pots.d 
 
 OBJS += \
 ./buttons.obj \
@@ -31,7 +35,9 @@ OBJS += \
 ./init_SSD1306.obj \
 ./lib_lcd.obj \
 ./lib_math.obj \
-./main.obj 
+./main.obj \
+./pong.obj \
+./pots.obj 
 
 OBJS__QUOTED += \
 "buttons.obj" \
@@ -40,7 +46,9 @@ OBJS__QUOTED += \
 "init_SSD1306.obj" \
 "lib_lcd.obj" \
 "lib_math.obj" \
-"main.obj" 
+"main.obj" \
+"pong.obj" \
+"pots.obj" 
 
 C_DEPS__QUOTED += \
 "buttons.d" \
@@ -49,7 +57,9 @@ C_DEPS__QUOTED += \
 "init_SSD1306.d" \
 "lib_lcd.d" \
 "lib_math.d" \
-"main.d" 
+"main.d" \
+"pong.d" \
+"pots.d" 
 
 C_SRCS__QUOTED += \
 "../buttons.c" \
@@ -58,6 +68,8 @@ C_SRCS__QUOTED += \
 "../init_SSD1306.c" \
 "../lib_lcd.c" \
 "../lib_math.c" \
-"../main.c" 
+"../main.c" \
+"../pong.c" \
+"../pots.c" 
 
 

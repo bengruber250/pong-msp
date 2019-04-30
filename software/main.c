@@ -6,6 +6,7 @@
 #include "buttons.h"
 #include "lib_lcd.h"
 #include "pong.h"
+#include "pots.h"
 #include "strings.h"
 
 
@@ -15,18 +16,17 @@ static int score_right = 0;
 
 static void display_score();
 static void init_display();
-static void init_pots();
 static void init_game();
 static void display_start();
 static void display_game_over(int winner);
 static int check_game_over();
-static void play_pong_round();
 static void display_score();
 
 int main()
 {
     WDTCTL=WDTPW+WDTHOLD;
     BCSCTL1=CALBC1_16MHZ;
+//    BCSCTL2 |= DIVS_3;
     DCOCTL=CALDCO_16MHZ;
 
     int winner;
@@ -57,14 +57,6 @@ static void init_display()
     init_ports();
     init_USCI();    // 4-wire SPI.
     init_LCD();
-}
-
-/*
- * Initializes the potentiometers.
- */
-static void init_pots()
-{
- // Will come from other file.
 }
 
 /*
@@ -115,15 +107,6 @@ static int check_game_over()
         return RIGHT;
     else
         return 0;
-}
-
-/*
- * Plays a single round of pong, incrementing either
- * score_left or score_right depending on the winner.
- */
-static void play_pong_round()
-{
-
 }
 
 /*

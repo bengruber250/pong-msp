@@ -57,6 +57,7 @@ void fill_display(unsigned char,unsigned char,unsigned char);
 void set_instruction(unsigned char,unsigned char);
 void init_USCI(void);
 void draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int height);
+void write_small_string(unsigned char x, unsigned char y, const char *string, unsigned char f_size);
 /*
  *
  */

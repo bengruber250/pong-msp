@@ -468,6 +468,19 @@ void draw_rect(unsigned int x, unsigned int y, unsigned int width, unsigned int 
 
 }
 
+
+void write_small_string(unsigned char x, unsigned char y, const char *string, unsigned char f_size)
+{
+    while(*string!=0)
+    {
+        write_char(x,y,*string++,f_size);
+        if(f_size==1) x+=f_size+1;
+        else if(f_size>1) x+=f_size;
+        else x++;
+    }
+}
+
+
 /*
 // for parallel port (8080)
 void set_instruction(unsigned char register_sel, unsigned char number)

@@ -4,10 +4,12 @@
  */
 
 #include <msp430g2553.h>
+#include <stdint.h>
 #include "buttons.h"
 
 #define WAITING 1
 #define NOT_WAITING 0
+#define DEBOUNCE_CNTS 20
 
 static int button_state = NOT_WAITING;
 
@@ -33,9 +35,32 @@ void wait_for_button_press()
     __bis_SR_register(LPM0_bits + GIE);
 }
 
+inline void wait_for_bounce()
+{
+    volatile uint16_t reading;
+    volatile uint16_t counts = 0;
+    volatile uint16_t prev_state;
+
+    while (1) {
+        if (counts >= DEBOUNCE_CNTS)
+            return;
+
+        reading = P2IN & (BIT4 | BIT5);
+
+        if (reading == prev_state)
+            counts++;
+        else if (reading != prev_state)
+            counts = 0;
+
+        prev_state = reading;
+    }
+}
+
+
 #pragma vector=PORT2_VECTOR
 __interrupt void Port_2 (void)
 {
+    wait_for_bounce();
     if(button_state == WAITING) {
         button_state = NOT_WAITING;
         P2IFG = 0;

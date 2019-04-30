@@ -25,19 +25,22 @@ static void update_paddle_positions();
 static void update_ball_position();
 static void clear_display();
 static void draw_paddles();
-static void draw_ball();
+static void draw_ball(int in_range);
 
 static int tick()
 {
     int side;
+    int in_range = 0;
     // Check for collisions and update ball velocities.
+    update_paddle_positions();
+    update_ball_position(); //(Maybe every nth tick so paddle can move faster than ball?)
     if (check_vertical_collisions()) {
         // Update ball vertical velocity
         // Don't forget to redraw things.
         ball_vy = -ball_vy;
     }
     if (side = check_horizontal_collisions()) {
-        if (ball_in_paddle_range(side)) {
+        if (in_range = ball_in_paddle_range(side)) {
             // Bounce and impart velocity of paddle.
             // Don't forget to redraw things.
             ball_vx = -ball_vx;
@@ -45,12 +48,10 @@ static int tick()
             return side;
     }
 
-    update_paddle_positions();
-    update_ball_position(); //(Maybe every nth tick so paddle can move faster than ball?)
 
     clear_display();
     draw_paddles();
-    draw_ball();
+    draw_ball(in_range);
     return 0;
 
 }
@@ -114,6 +115,7 @@ static void update_paddle_positions()
 
 static void update_ball_position()
 {
+
     ball_x = constrain(ball_x + ball_vx, 0, LCD_WIDTH - 1);
     ball_y = constrain(ball_y + ball_vy, 0, LCD_HEIGHT - 1);
 }
@@ -129,8 +131,10 @@ static void draw_paddles()
     draw_rect(LCD_WIDTH - 1, paddle_right_y, 1, PADDLE_HEIGHT);
 }
 
-static void draw_ball()
+static void draw_ball(int in_range)
 {
+    if (in_range)
+        return;
     draw_rect(ball_x, ball_y, BALL_SIZE, BALL_SIZE);
 }
 

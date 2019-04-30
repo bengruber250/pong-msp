@@ -1,3 +1,6 @@
+/*
+ * This code is adapted from source found here: http://xdec.de/msp430-oled-display-ssd1306-128x64/
+ */
 #include <msp430g2553.h>
 #include "lib_lcd.h"
 #include "delay.h"
@@ -40,15 +43,13 @@ void init_LCD(void)
 		set_instruction(0,init_cmd_array[sizeof(init_cmd_array)-byte]);		
 		byte--;
 	}
-	// display RAM is undefined after reset, clean dat shit
+	// display RAM is undefined after reset, clean.
 	fill_display(lcd_width,lcd_height,0x00);	
 }
 
 void init_ports(void)
 {
-	//P1DIR|=0xFF;				// parallel port for OLED-Display
-	//P1OUT&=~0xFF;
 	P2DIR|=CS+DC+RES;
 	P2OUT&=~RES;			// reset, write, read LOW
-	P2OUT|=CS;					// chip select HIGH
+	P2OUT|=CS;			    // chip select HIGH
 }

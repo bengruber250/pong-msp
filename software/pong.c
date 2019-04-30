@@ -76,16 +76,14 @@ static int check_vertical_collisions()
 int play_pong_round(int prev_loser)
 {
     /* Right loses then left serves. */
+    ball_y = 30;
+    ball_vy = 2;
     if (prev_loser == RIGHT) {
-        ball_x = 12;
-        ball_y = 49;
+        ball_x = 7;
         ball_vx = 4;
-        ball_vy = 2;
     } else {
-        ball_x = lcd_width - 12;
-        ball_y = 49;
+        ball_x = lcd_width - 7;
         ball_vx = -4;
-        ball_vy = 2;
     }
     int loser;
     while(!(loser = tick())) {

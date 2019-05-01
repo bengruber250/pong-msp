@@ -9,7 +9,7 @@
 
 #define WAITING 1
 #define NOT_WAITING 0
-#define DEBOUNCE_CNTS 500
+#define DEBOUNCE_CNTS 1000
 
 static int button_state = NOT_WAITING;
 
@@ -30,9 +30,12 @@ void init_buttons()
 
 void wait_for_button_press()
 {
+    while(!(P2IN & BIT5) || !(P2IN & BIT4));
+    __delay_cycles(100000);
     button_state = WAITING; // Set waiting flag.
     // Enter LPM until ISR wakes and clears waiting flag.
     __bis_SR_register(LPM0_bits + GIE);
+//    __delay_cycles(100000);
 }
 
 inline void wait_for_bounce()
@@ -69,5 +72,4 @@ __interrupt void Port_2 (void)
     else {
         P2IFG = 0;
     }
-
 }

@@ -9,6 +9,8 @@
 #include "erandom.h"
 
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+#define AI_FOV 30
+#define AI_LAG 2
 
 static int ball_x;
 static int ball_y;
@@ -28,7 +30,14 @@ static void clear_display();
 static void draw_paddles();
 static void draw_ball(int in_range);
 static void draw_ball_and_paddles(int in_range);
+static void draw_border()
+{
+    draw_rect(1, 0, lcd_width - 2, 1);
+    draw_rect(1, lcd_height-1, lcd_width - 2, 1);
+}
 
+int tickno = 0;
+int ball_yold;
 static int tick()
 {
     int side;
@@ -56,8 +65,15 @@ static int tick()
 
 
     clear_display();
+//    draw_border();
     draw_paddles();
     draw_ball(in_range);
+
+    if ((tickno++) == AI_LAG) {
+        ball_yold = ball_y;
+        tickno = 0;
+    }
+
     return 0;
 
 }
@@ -122,7 +138,9 @@ static void update_paddle_positions()
 {
     get_pots();
     paddle_left_y = map(constrain(pot_vals[1], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
-    paddle_right_y = map(constrain(pot_vals[0], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
+//    paddle_right_y = map(constrain(pot_vals[0], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
+    if (ball_x > ((LCD_WIDTH / 2) - AI_FOV))
+        paddle_right_y = constrain(ball_yold - (PADDLE_HEIGHT >> 1), 0, LCD_HEIGHT - PADDLE_HEIGHT);
     return;
 }
 

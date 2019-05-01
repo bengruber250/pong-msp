@@ -9,7 +9,7 @@ CMD_SRCS += \
 C_SRCS += \
 ../buttons.c \
 ../delay.c \
-../german_example.c \
+../erandom.c \
 ../init_SSD1306.c \
 ../lib_lcd.c \
 ../lib_math.c \
@@ -20,7 +20,7 @@ C_SRCS += \
 C_DEPS += \
 ./buttons.d \
 ./delay.d \
-./german_example.d \
+./erandom.d \
 ./init_SSD1306.d \
 ./lib_lcd.d \
 ./lib_math.d \
@@ -31,7 +31,7 @@ C_DEPS += \
 OBJS += \
 ./buttons.obj \
 ./delay.obj \
-./german_example.obj \
+./erandom.obj \
 ./init_SSD1306.obj \
 ./lib_lcd.obj \
 ./lib_math.obj \
@@ -42,7 +42,7 @@ OBJS += \
 OBJS__QUOTED += \
 "buttons.obj" \
 "delay.obj" \
-"german_example.obj" \
+"erandom.obj" \
 "init_SSD1306.obj" \
 "lib_lcd.obj" \
 "lib_math.obj" \
@@ -53,7 +53,7 @@ OBJS__QUOTED += \
 C_DEPS__QUOTED += \
 "buttons.d" \
 "delay.d" \
-"german_example.d" \
+"erandom.d" \
 "init_SSD1306.d" \
 "lib_lcd.d" \
 "lib_math.d" \
@@ -64,7 +64,7 @@ C_DEPS__QUOTED += \
 C_SRCS__QUOTED += \
 "../buttons.c" \
 "../delay.c" \
-"../german_example.c" \
+"../erandom.c" \
 "../init_SSD1306.c" \
 "../lib_lcd.c" \
 "../lib_math.c" \

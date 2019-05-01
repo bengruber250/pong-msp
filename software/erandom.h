@@ -9,7 +9,7 @@
 #define ERANDOM_H_
 
 //#define RAND_MAX 1
-#define RAND_MAX 3
+#define RAND_MAX 6
 //#define RAND_MAX 7
 //#define RAND_MAX 15
 //#define RAND_MAX 31

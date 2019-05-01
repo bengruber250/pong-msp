@@ -121,8 +121,10 @@ static int ball_in_paddle_range(int side)
 static void update_paddle_positions()
 {
     get_pots();
-    paddle_left_y = map(pot_vals[1], 0, 1023, 0, LCD_HEIGHT - PADDLE_HEIGHT - 1);
-    paddle_right_y = map(pot_vals[0], 0, 1023, 0, LCD_HEIGHT - PADDLE_HEIGHT - 1);
+    paddle_left_y = constrain(pot_vals[1], 0, 1020);
+    paddle_right_y = constrain(pot_vals[0], 0, 1020);
+    paddle_left_y = map(pot_vals[1], 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
+    paddle_right_y = map(pot_vals[0], 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
     return;
 }
 

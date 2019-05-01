@@ -15,7 +15,7 @@
 
 static int score_left = 0;
 static int score_right = 0;
-static int ai_difficulty = 0;
+static int ai_difficulty = 1;
 
 
 static void display_score();
@@ -64,7 +64,7 @@ int main()
                    break;
                }
                if (ai_difficulty > 5)
-                   ai_difficulty = 0;
+                   ai_difficulty = 1;
            }
            pong_init_ai(ai_difficulty);
        }

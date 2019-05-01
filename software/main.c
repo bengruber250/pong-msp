@@ -177,6 +177,7 @@ static void display_player_select()
     fill_display(lcd_width, lcd_height, 0x00); // Clear display.
     write_small_string(1, 2, str_select, 0); // Write subtitle.
     write_small_string(1, 3, str_select2, 0); // Write subtitle.
+    write_small_string(1, 5, str_select3, 0); // Write subtitle.
 }
 
 static void display_ai_select(int ai_difficulty)

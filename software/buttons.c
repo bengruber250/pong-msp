@@ -43,6 +43,8 @@ void wait_for_select_press()
 {
     while(!(P2IN & BIT5) || !(P2IN & BIT4));
     __delay_cycles(100000);
+    left = 0;
+    right = 0;
     button_state = NOT_WAITING; // Set waiting flag.
     __bis_SR_register(LPM0_bits + GIE);
 }
@@ -79,11 +81,9 @@ __interrupt void Port_2 (void)
     }
     if (P2IFG & BIT4) {
         right = 1;
-        P2IFG &= ~BIT4;
     }
     if (P2IFG & BIT5) {
         left = 1;
-        P2IFG &= ~BIT5;
     }
     P2IFG = 0;
     __bic_SR_register_on_exit(LPM0_bits);

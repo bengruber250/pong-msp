@@ -130,8 +130,8 @@ void pong_init_ai(int ai_difficulty)
     case 2:
         ai_ultrainstinct = 0;
         ai_fov = 27;
-        ai_lag = 2;
-        ai_diff = 1;
+        ai_lag = 1;
+        ai_diff = 2;
         break;
     case 1:
         ai_ultrainstinct = 1;

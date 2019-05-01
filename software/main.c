@@ -52,15 +52,12 @@ int main()
        display_player_select();
        wait_for_select_press();
        if (left) {
-           left = 0;
            while (1) {
                display_ai_select(ai_difficulty);
                wait_for_select_press();
                if (left) {
-                   left = 0;
                    ai_difficulty++;
                } else if (right) {
-                   right = 0;
                    break;
                }
                if (ai_difficulty > 5)

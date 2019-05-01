@@ -64,9 +64,6 @@ Using the above routine to turn on single pixels, we wrote more advanced routine
 \section{System Architecture}
 \subsection{Hardware}
 
-sch, layout maybe? ergonomics? tall buttons
-jumpers for power
-
 Figure 2 below shows the block diagram for our system. This high level diagram allowed us to brainstorm ideas and have a very clear road map when going into the schematic design. It was also useful for writing software since it pinpoints the hardware dependencies of each of our components.
 
 \begin{figure}[h!]
@@ -78,6 +75,8 @@ Figure 2 below shows the block diagram for our system. This high level diagram a
 
 The schematic is in 7 after the end of the document. We followed the standard design patters we learned throughout the semester. One thing to note is the power selection jumpers. These jumpers allow us to change the power supplies for the MSP430 and the OLED module independently. The MSP430 can be powered from the launchpad, from the discrete regulator, or from the onboard regulator on the OLED module. The OLED can be powered from the launchpad, from the 6 V battery pack, or from the discrete regulator. We chose to add these jumpers because of two things. We wanted the ability to isolate power supplies that were not in use, and we wanted to test the system under different configurations using the available supplies.
 These jumpers proved to be useful during software development because the device could be running off of battery power while getting plugged in to our computers back and forth. 
+
+Lastly our layout is in figure 8. We chose to spread out the potentiometers and buttons to give the players ample space to interact with the game simultaneously while focusing on the screen in the center. This also allows the game to be played with the players facing each other!
 
 \subsection{Software}
 We maintain our game state by tracking the position and velocity of the ball in the x and y directions, as well as the vertical position

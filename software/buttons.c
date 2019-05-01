@@ -21,6 +21,8 @@ void init_buttons()
      * Both buttons are active low.
      * We therefore trigger on all falling edges.
      */
+    right = 0;
+    left = 0;
     P2DIR &= ~(BIT4 | BIT5); // Clear only bits 4 and 5. (Input mode)
     P2REN |= (BIT4 | BIT5); // Enable pull up/down resistors.
     P2IES |= (BIT4 | BIT5); // Falling edge interrupts.
@@ -35,7 +37,14 @@ void wait_for_button_press()
     button_state = WAITING; // Set waiting flag.
     // Enter LPM until ISR wakes and clears waiting flag.
     __bis_SR_register(LPM0_bits + GIE);
-//    __delay_cycles(100000);
+}
+
+void wait_for_select_press()
+{
+    while(!(P2IN & BIT5) || !(P2IN & BIT4));
+    __delay_cycles(100000);
+    button_state = NOT_WAITING; // Set waiting flag.
+    __bis_SR_register(LPM0_bits + GIE);
 }
 
 inline void wait_for_bounce()
@@ -67,9 +76,14 @@ __interrupt void Port_2 (void)
     if(button_state == WAITING) {
         button_state = NOT_WAITING;
         P2IFG = 0;
-        __bic_SR_register_on_exit(LPM0_bits);
-    }
-    else {
+    } else if (P2IFG & BIT4) {
+        right = 1;
+        P2IFG &= ~BIT4;
+    } else if (P2IFG & BIT5) {
+        left = 1;
+        P2IFG &= ~BIT5;
+    } else {
         P2IFG = 0;
     }
+    __bic_SR_register_on_exit(LPM0_bits);
 }

@@ -75,7 +75,7 @@ __interrupt void Port_2 (void)
     wait_for_bounce();
     if(button_state == WAITING) {
         button_state = NOT_WAITING;
-        P2IFG = 0;
+
     }
     if (P2IFG & BIT4) {
         right = 1;
@@ -85,5 +85,6 @@ __interrupt void Port_2 (void)
         left = 1;
         P2IFG &= ~BIT5;
     }
+    P2IFG = 0;
     __bic_SR_register_on_exit(LPM0_bits);
 }

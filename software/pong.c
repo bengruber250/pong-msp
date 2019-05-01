@@ -9,8 +9,15 @@
 #include "erandom.h"
 
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+// AI is right.
+// From center of screen towards left, how far away can the AI see the ball
 #define AI_FOV 30
-#define AI_LAG 2
+// how old is the ball data that the ai has access to
+#define AI_LAG 1
+// When AI can see ball, how fast can it move (number of times to divide movement adjustment by 2)
+#define AI_DIFF 2
+// From right, region in which the AI exactly moves to match it's last known ball data.
+#define AI_ULTRAINSTINCT 10
 
 static int ball_x;
 static int ball_y;
@@ -30,11 +37,6 @@ static void clear_display();
 static void draw_paddles();
 static void draw_ball(int in_range);
 static void draw_ball_and_paddles(int in_range);
-static void draw_border()
-{
-    draw_rect(1, 0, lcd_width - 2, 1);
-    draw_rect(1, lcd_height-1, lcd_width - 2, 1);
-}
 
 int tickno = 0;
 int ball_yold;
@@ -65,7 +67,6 @@ static int tick()
 
 
     clear_display();
-//    draw_border();
     draw_paddles();
     draw_ball(in_range);
 
@@ -136,11 +137,18 @@ static int ball_in_paddle_range(int side)
 
 static void update_paddle_positions()
 {
+    static int ai_mov = 0;
     get_pots();
     paddle_left_y = map(constrain(pot_vals[1], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
 //    paddle_right_y = map(constrain(pot_vals[0], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
-    if (ball_x > ((LCD_WIDTH / 2) - AI_FOV))
-        paddle_right_y = constrain(ball_yold - (PADDLE_HEIGHT >> 1), 0, LCD_HEIGHT - PADDLE_HEIGHT);
+    if (ball_x > LCD_WIDTH - AI_ULTRAINSTINCT) {
+        ai_mov = ball_yold - (paddle_right_y + (PADDLE_HEIGHT >> 1));
+        paddle_right_y = constrain(paddle_right_y + ai_mov, 0, LCD_HEIGHT - PADDLE_HEIGHT);
+    } else if (ball_x > ((LCD_WIDTH / 2) - AI_FOV)) {
+        ai_mov = ball_yold - (paddle_right_y + (PADDLE_HEIGHT >> 1));
+        ai_mov >>= AI_DIFF;
+        paddle_right_y = constrain(paddle_right_y + ai_mov, 0, LCD_HEIGHT - PADDLE_HEIGHT);
+    }
     return;
 }
 

@@ -108,11 +108,12 @@ static int check_horizontal_collisions()
 
 static int ball_in_paddle_range(int side)
 {
+    int hit_margin = 1;
     if (side == LEFT) {
-        return ((ball_y >= paddle_left_y) && (ball_y <= (paddle_left_y + PADDLE_HEIGHT)));
+        return ((ball_y >= (paddle_left_y - hit_margin)) && (ball_y <= (paddle_left_y + PADDLE_HEIGHT + hit_margin)));
     }
     else if (side == RIGHT) {
-        return ((ball_y >= paddle_right_y) && (ball_y <= (paddle_right_y + PADDLE_HEIGHT)));
+        return ((ball_y >= (paddle_right_y - hit_margin)) && (ball_y <= (paddle_right_y + PADDLE_HEIGHT + hit_margin)));
     }
     return -1;
 }

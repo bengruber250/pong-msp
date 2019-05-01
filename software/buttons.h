@@ -6,8 +6,8 @@
 #ifndef BUTTONS_H_
 #define BUTTONS_H_
 
-int left;
-int right;
+volatile int left;
+volatile int right;
 
 /*
  * Initializes buttons for pong.

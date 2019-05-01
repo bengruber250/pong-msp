@@ -15,7 +15,6 @@
 
 static int score_left = 0;
 static int score_right = 0;
-static int ai_enable = 0;
 static int ai_difficulty = 0;
 
 
@@ -54,7 +53,6 @@ int main()
        wait_for_select_press();
        if (left) {
            left = 0;
-           ai_enable = 1;
            while (1) {
                display_ai_select(ai_difficulty);
                wait_for_select_press();
@@ -68,6 +66,7 @@ int main()
                if (ai_difficulty > 5)
                    ai_difficulty = 0;
            }
+           pong_init_ai(ai_difficulty);
        }
        right = 0;
        int prev_loser = RIGHT;

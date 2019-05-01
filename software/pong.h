@@ -16,6 +16,7 @@
 #define LCD_WIDTH 128
 
 int play_pong_round(int prev_winner);
+void pong_init_ai(int ai_difficulty);
 
 
 

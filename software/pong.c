@@ -9,15 +9,16 @@
 #include "erandom.h"
 
 #define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
-// AI is right.
+
+static int ai_enable = 0;
 // From center of screen towards left, how far away can the AI see the ball
-#define AI_FOV 30
+static int ai_fov = 37;
 // how old is the ball data that the ai has access to
-#define AI_LAG 1
+static int ai_lag = 0;
 // When AI can see ball, how fast can it move (number of times to divide movement adjustment by 2)
-#define AI_DIFF 2
+static int ai_diff = 1;
 // From right, region in which the AI exactly moves to match it's last known ball data.
-#define AI_ULTRAINSTINCT 10
+static int ai_ultrainstinct = 20;
 
 static int ball_x;
 static int ball_y;
@@ -70,7 +71,7 @@ static int tick()
     draw_paddles();
     draw_ball(in_range);
 
-    if ((tickno++) == AI_LAG) {
+    if ((tickno++) == ai_lag) {
         ball_yold = ball_y;
         tickno = 0;
     }
@@ -109,6 +110,45 @@ int play_pong_round(int prev_loser)
     return loser;
 }
 
+void pong_init_ai(int ai_difficulty)
+{
+    ai_enable = 1;
+    switch (ai_difficulty) {
+    case 5:
+        // init vals are highest diff.
+        break;
+    case 4:
+        ai_ultrainstinct = 4;
+        break;
+    case 3:
+        // THIS IS FINE
+        ai_ultrainstinct = 0;
+        ai_fov = 30;
+        ai_lag = 1;
+        ai_diff = 1;
+        break;
+    case 2:
+        ai_ultrainstinct = 0;
+        ai_fov = 30;
+        ai_lag = 2;
+        ai_diff = 1;
+        break;
+    case 1:
+        ai_ultrainstinct = 2;
+        ai_fov = 30;
+        ai_lag = 2;
+        ai_diff = 2;
+        break;
+    case 0:
+        ai_ultrainstinct = 0;
+        ai_fov = 30;
+        ai_lag = 3;
+        ai_diff = 1;
+        break;
+
+    }
+}
+
 /*
  * Returns LEFT if left horizontal collision,
  * RIGHT if right, and 0 else.
@@ -140,14 +180,17 @@ static void update_paddle_positions()
     static int ai_mov = 0;
     get_pots();
     paddle_left_y = map(constrain(pot_vals[1], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
-//    paddle_right_y = map(constrain(pot_vals[0], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
-    if (ball_x > LCD_WIDTH - AI_ULTRAINSTINCT) {
-        ai_mov = ball_yold - (paddle_right_y + (PADDLE_HEIGHT >> 1));
-        paddle_right_y = constrain(paddle_right_y + ai_mov, 0, LCD_HEIGHT - PADDLE_HEIGHT);
-    } else if (ball_x > ((LCD_WIDTH / 2) - AI_FOV)) {
-        ai_mov = ball_yold - (paddle_right_y + (PADDLE_HEIGHT >> 1));
-        ai_mov >>= AI_DIFF;
-        paddle_right_y = constrain(paddle_right_y + ai_mov, 0, LCD_HEIGHT - PADDLE_HEIGHT);
+    if (ai_enable) {
+        if (ball_x > LCD_WIDTH - ai_ultrainstinct) {
+            ai_mov = ball_yold - (paddle_right_y + (PADDLE_HEIGHT >> 1));
+            paddle_right_y = constrain(paddle_right_y + ai_mov, 0, LCD_HEIGHT - PADDLE_HEIGHT);
+        } else if (ball_x > ((LCD_WIDTH / 2) - ai_fov)) {
+            ai_mov = ball_yold - (paddle_right_y + (PADDLE_HEIGHT >> 1));
+            ai_mov >>= ai_diff;
+            paddle_right_y = constrain(paddle_right_y + ai_mov, 0, LCD_HEIGHT - PADDLE_HEIGHT);
+        }
+    } else {
+        paddle_right_y = map(constrain(pot_vals[0], 0, 1020), 0, 1020, 0, LCD_HEIGHT - PADDLE_HEIGHT );
     }
     return;
 }

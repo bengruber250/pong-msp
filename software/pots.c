@@ -7,13 +7,11 @@ void init_pots(void)
 {
     /* Repeat seq. of channels, starting at A2, SMCLK / 2. */
     ADC10CTL1 = CONSEQ_1 | INCH_2 | ADC10SSEL_3 | ADC10DIV_1;
-    /* 16 cycle sample, multi sample, interrupt enable. */
+    /* 16 cycle sample, multi sample*/
     ADC10CTL0 = ADC10SHT_2 | MSC | ADC10ON;
-    /* Enable channels A0-A2. */
+    /* Enable channels A1-A2. */
     ADC10AE0 = BIT1 | BIT2;
-    /* Enable data transfer controller in continous, 2 block mode. */
-//    ADC10DTC0 = ADC10CT;
-    /* 3 transfers per block:  transfers 1 and 2 are channels A2 and A1. */
+    /* 2 transfers per block. */
     ADC10DTC1 = 0x02;
     /* Start address for transfers */
     ADC10SA = (int)pot_vals;

@@ -76,14 +76,14 @@ __interrupt void Port_2 (void)
     if(button_state == WAITING) {
         button_state = NOT_WAITING;
         P2IFG = 0;
-    } else if (P2IFG & BIT4) {
+    }
+    if (P2IFG & BIT4) {
         right = 1;
         P2IFG &= ~BIT4;
-    } else if (P2IFG & BIT5) {
+    }
+    if (P2IFG & BIT5) {
         left = 1;
         P2IFG &= ~BIT5;
-    } else {
-        P2IFG = 0;
     }
     __bic_SR_register_on_exit(LPM0_bits);
 }

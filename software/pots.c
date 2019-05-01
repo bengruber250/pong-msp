@@ -11,19 +11,20 @@ void init_pots(void)
     ADC10CTL0 = ADC10SHT_2 | MSC | ADC10ON;
     /* Enable channels A1-A2. */
     ADC10AE0 = BIT1 | BIT2;
-    /* 2 transfers per block. */
-    ADC10DTC1 = 0x02;
-    /* Start address for transfers */
-    ADC10SA = (int)pot_vals;
+
 }
 
 void get_pots(void)
 {
+    /* 2 transfers per block. */
+    ADC10DTC1 = 0x02;
+    /* Start address for transfers */
+    ADC10SA = (int)pot_vals;
+    /* Start conversions */
     ADC10CTL0 |= ADC10SC | ENC;
 //    __bis_SR_register(CPUOFF+GIE);
     while(!(ADC10CTL0 & ADC10IFG));
-    ADC10DTC1 = 0x02;
-    ADC10SA = (int)pot_vals;
+    ADC10CTL0 &= ~ADC10IFG;
 }
 
 //#pragma vector=ADC10_VECTOR

@@ -15,6 +15,9 @@
 
 static int score_left = 0;
 static int score_right = 0;
+static int ai_enable = 0;
+static int ai_difficulty = 0;
+
 
 static void display_score();
 static void init_display();
@@ -24,6 +27,8 @@ static void display_game_over(int winner);
 static int check_game_over();
 static void display_score();
 static void update_score( int winner);
+static void display_player_select();
+static void display_ai_select(int ai_difficulty);
 
 int main()
 {
@@ -45,8 +50,28 @@ int main()
        init_game();
        display_start();
        wait_for_button_press();
+       display_player_select();
+       wait_for_select_press();
+       if (left) {
+           left = 0;
+           ai_enable = 1;
+           while (1) {
+               display_ai_select(ai_difficulty);
+               wait_for_select_press();
+               if (left) {
+                   left = 0;
+                   ai_difficulty++;
+               } else if (right) {
+                   right = 0;
+                   break;
+               }
+               if (ai_difficulty > 5)
+                   ai_difficulty = 0;
+           }
+       }
+       right = 0;
        int prev_loser = RIGHT;
-       while(!(winner = check_game_over())){
+       while(!(winner = check_game_over())) {
            int loser = play_pong_round(prev_loser);
            update_score(loser);
            display_score();
@@ -145,6 +170,24 @@ static void update_score(int loser)
         score_right++;
     else if (loser == RIGHT)
         score_left++;
+}
+
+static void display_player_select()
+{
+    fill_display(lcd_width, lcd_height, 0x00); // Clear display.
+    write_small_string(1, 2, str_select, 0); // Write subtitle.
+    write_small_string(1, 3, str_select2, 0); // Write subtitle.
+}
+
+static void display_ai_select(int ai_difficulty)
+{
+    char diff_str[] = "Difficulty: 0";
+    diff_str[12] = ai_difficulty + '0';
+    fill_display(lcd_width, lcd_height, 0x00); // Clear display.
+    write_small_string(1, 2, str_selectai, 0); // Write subtitle.
+    write_small_string(1, 3, str_selectai2, 0); // Write subtitle.
+    write_small_string(1, 4, str_selectai3, 0); // Write subtitle.
+    write_small_string(1, 6, diff_str, 0); // Write subtitle.
 }
 
 // Watchdog Timer interrupt service routine

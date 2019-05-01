@@ -19,9 +19,9 @@ void init_rand_adc_seed(void)
 {
     // ADC Config
     ADC10CTL0 = SREF_1 + ADC10SHT_0 + ADC10ON;      // V_ref-Vss, hold for 4 cycles, adc on
-    ADC10CTL0 |= ADC10IE + REFON + REF2_5V;         // interrupt enable, reference at 2.5 V
+    ADC10CTL0 |= REFON + REF2_5V;         // interrupt enable, reference at 2.5 V
     ADC10CTL0 |= ADC10SR;                           // less current usage by reducing reference buffer drive
-    ADC10CTL1 = INCH_2 + ADC10DIV_0 + ADC10SSEL_1;  // input P1.0, clock divider 0, driven by ACLK
+    ADC10CTL1 = INCH_2 + ADC10DIV_0 + ADC10SSEL_3;  // input P1.0, clock divider 0, driven by ACLK
     ADC10AE0 |= BIT0;                               // Enable ADC function on P1.0
 
     ADC10CTL0 |= ENC + ADC10SC;                     // Sampling and conversion start
